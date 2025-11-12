@@ -4,12 +4,12 @@ public class User {
 	
 	private String name;
 	private String password;
-	private String roles;
+	private Role role;
 	
-	public User(String name, String password) {
+	public User(String name, String password, Role role) {
 		this.name = name;
 		this.password = password;
-		this.roles = "Crewmate";
+		this.role = role;
 	}
 	
 	public String getName() {
@@ -20,7 +20,7 @@ public class User {
 		return password;
 	}
 
-	public String getRole() {
-		return roles;
+	public Role getRole() {
+		return role;
 	}
 }

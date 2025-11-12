@@ -18,16 +18,16 @@ public class Authenticator {
                 return;
             }
         }
-        this.credentialStore.add(newUser);  // Add user if they don't exist already
+        this.credentialStore.add(newUser);  
     }
 	
-	 public boolean verifyUser(String username, String password) {
+	 public User verifyUser(String username, String password) {
 	        for (User user : credentialStore) {
 	            if (user.getName().equals(username) && user.getPassword().equals(password)) {
-	                return true;  
+	                return user;  
 	            }
 	        }
-	        return false;  // Authentication failed
+	        return null; 
 	    }
 	
 }
