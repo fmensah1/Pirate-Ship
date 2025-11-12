@@ -15,8 +15,8 @@ import javafx.scene.layout.Pane;
  */
 public class Main extends Application {
 
-	private static final String WINDOW_TITLE = "Greetings";
-	private static final String GUI_FXML = "view/hello.fxml";
+	private static final String WINDOW_TITLE = "Login page";
+	private static final String GUI_FXML = "view/login.fxml";
 
 	@Override
 	public void start(Stage primaryStage) {
