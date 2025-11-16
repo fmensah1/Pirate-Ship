@@ -42,7 +42,6 @@ public class LoginViewModel {
         return this.loginText;
     }
 
-    // Login logic
     public User login() {
         String name = this.usernameProperty.getValue();
         String password = this.passwordProperty.getValue();

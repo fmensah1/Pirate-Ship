@@ -1,5 +1,6 @@
 package edu.westga.cs3211.pirate_ship_inventory.view;
 
+import edu.westga.cs3211.pirate_ship_inventory.model.Inventory;
 import edu.westga.cs3211.pirate_ship_inventory.model.User;
 import edu.westga.cs3211.pirate_ship_inventory.viewmodel.LoginViewModel;
 import javafx.fxml.FXML;
@@ -59,14 +60,16 @@ public class LoginCodeBehind {
             DefaultLandingPageCodeBehind landing = loader.getController();
             landing.setUsername(user.getName());
             landing.setRole(user.getRole());
+            landing.setCurrentUser(user);
+            landing.setInventory(new Inventory()); 
 
             Stage stage = (Stage) this.loginButton.getScene().getWindow();
             stage.setScene(new Scene(root));
-            stage.setTitle("Landing");
+            stage.setTitle("HomePage");
             stage.centerOnScreen();
         } catch (Exception ex) {
             ex.printStackTrace();
-            this.viewModel.loginTextProperty().set("Failed to open landing page");  // ✅
+            this.viewModel.loginTextProperty().set("Failed to open landing page");  
         }
     }
 

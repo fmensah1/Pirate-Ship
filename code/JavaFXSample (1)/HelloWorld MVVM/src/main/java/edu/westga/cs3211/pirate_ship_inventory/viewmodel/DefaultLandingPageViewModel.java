@@ -16,6 +16,7 @@ public class DefaultLandingPageViewModel {
 
     public DefaultLandingPageViewModel() {
         this.welcomeText = new SimpleStringProperty("Welcome");   
+        
     }
     
 
@@ -55,7 +56,7 @@ public class DefaultLandingPageViewModel {
         }
         switch (role) {
             case CREWMATE:
-                // basic landing, no extras
+            	this.showAddStock.set(true);
                 break;
             case QUARTERMASTER:
                 this.showAddStock.set(true);   // example: quartermaster can add stock
