@@ -14,17 +14,40 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DefaultLandingPageCodeBehind.
+ * 
+ * @author fmensah1
+ * @version cs3211
+ */
 public class DefaultLandingPageCodeBehind {
 	
+    /** The welcome text. */
     @FXML
     private Label welcomeText;
+    
+    /** The add stock button. */
     @FXML private Button addStockButton;
+    
+    /** The review stock changes button. */
     @FXML private Button reviewStockChangesButton;
+    
+    /** The get food button. */
     @FXML private Button getFoodButton;
+    
+    /** The vm. */
     private DefaultLandingPageViewModel vm;
+    
+    /** The current user. */
     private User currentUser; 
+    
+    /** The inventory. */
     private Inventory inventory; 
 	
+/**
+ * Initialize.
+ */
 @FXML
 public void initialize() {
     this.vm = new DefaultLandingPageViewModel();
@@ -40,24 +63,48 @@ public void initialize() {
     this.getFoodButton.managedProperty().bind(this.getFoodButton.visibleProperty());
 }
 
+	/**
+	 * Sets the username.
+	 *
+	 * @param username the new username
+	 */
 	public void setUsername(String username) {
 		this.vm.setUsername(username);
 	}
+	
+	/**
+	 * Sets the role.
+	 *
+	 * @param role the new role
+	 */
 	public void setRole(Role role) {
 		this.vm.setRole(role);
 	}
 	
-	 public void setCurrentUser(User user) {
+	 /**
+ 	 * Sets the current user.
+ 	 *
+ 	 * @param user the new current user
+ 	 */
+ 	public void setCurrentUser(User user) {
 	        this.currentUser = user;
 	    }
 	    
-	    public void setInventory(Inventory inventory) {
+	    /**
+    	 * Sets the inventory.
+    	 *
+    	 * @param inventory the new inventory
+    	 */
+    	public void setInventory(Inventory inventory) {
 	        this.inventory = inventory;
 	        System.out.println("Landing received inventory: " + inventory);
 	       
 	    }
 	    
-	 @FXML
+	 /**
+ 	 * Handle add stock.
+ 	 */
+ 	@FXML
 	    private void handleAddStock() {
 		 try {
 		        FXMLLoader loader = new FXMLLoader(getClass().getResource("AddStock.fxml"));
@@ -68,22 +115,42 @@ public void initialize() {
 		        addStockController.setInventory(this.inventory);
 		        
 		        // Get the current stage and switch scenes
-		        Stage stage = (Stage) addStockButton.getScene().getWindow();
+		        Stage stage = (Stage) this.addStockButton.getScene().getWindow();
 		        stage.setScene(new Scene(addStockRoot));
 		        stage.setTitle("Add New Stock");
 		        
-		    } catch (IOException e) {
-		        e.printStackTrace();
-		        //showErrorAlert("Could not load Add Stock screen");
+		    } catch (IOException error) {
+		        error.printStackTrace();
 		    }
 	    }
 
-	    @FXML
+	    /**
+    	 * Handle review stock changes.
+    	 */
+    	@FXML
 	    private void handleReviewStockChanges() {
+	    	   try {
+	               FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewStockChanges.fxml"));
+	               Parent reviewStockRoot = loader.load();
+	               
+	               ViewStockChangesCodeBehind reviewController = loader.getController();
+	               reviewController.setCurrentUser(this.currentUser);  
+	               reviewController.setInventory(this.inventory);
+	               
+	               Stage stage = (Stage) this.reviewStockChangesButton.getScene().getWindow();
+	               stage.setScene(new Scene(reviewStockRoot));
+	               stage.setTitle("Review Stock Changes");
+	               
+	           } catch (IOException error) {
+	               error.printStackTrace();
+	           }
 	        
 	    }
 
-	    @FXML
+	    /**
+    	 * Handle get food.
+    	 */
+    	@FXML
 	    private void handleGetFood() {
 	       
 	    }

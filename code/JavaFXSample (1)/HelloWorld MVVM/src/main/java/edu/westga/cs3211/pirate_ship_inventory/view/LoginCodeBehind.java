@@ -12,43 +12,74 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class LoginCodeBehind.
+ * 
+ * @author fmensah1
+ * @version cs3211
+ */
 public class LoginCodeBehind {
 
+    /** The username text field. */
     @FXML private TextField usernameTextField;
+    
+    /** The password text field. */
     @FXML private TextField passwordTextField;
+    
+    /** The login button. */
     @FXML private Button loginButton;
+    
+    /** The login text. */
     @FXML private Label loginText;
 
+    /** The view model. */
     private LoginViewModel viewModel;
 
+    /**
+     * Instantiates a new login code behind.
+     */
     public LoginCodeBehind() {
         this.viewModel = new LoginViewModel();
     }
 
+    /**
+     * Initialize.
+     */
     @FXML
     void initialize() {
         this.bindComponentsToViewModel();
         this.loginButton.disableProperty().bind(
-                viewModel.usernameProperty().isEmpty()
-                    .or(viewModel.passwordProperty().isEmpty())
+        		this.viewModel.usernameProperty().isEmpty()
+                    .or(this.viewModel.passwordProperty().isEmpty())
             ); 
     }
 
-    // Bind ViewModel to UI components
+    /**
+     * Bind components to view model.
+     */
     private void bindComponentsToViewModel() {
-        usernameTextField.textProperty().bindBidirectional(viewModel.usernameProperty());
-        passwordTextField.textProperty().bindBidirectional(viewModel.passwordProperty());
-        loginText.textProperty().bind(viewModel.loginTextProperty());
+        this.usernameTextField.textProperty().bindBidirectional(this.viewModel.usernameProperty());
+        this.passwordTextField.textProperty().bindBidirectional(this.viewModel.passwordProperty());
+        this.loginText.textProperty().bind(this.viewModel.loginTextProperty());
     }
     
+    /**
+     * Handle login.
+     */
     @FXML
 	void handleLogin() {
     	 User authenticUser = this.viewModel.login();
 	    if (authenticUser !=  null) {
-            openLanding(authenticUser);
+	    	this.openLanding(authenticUser);
         }
 	}
     
+    /**
+     * Open landing.
+     *
+     * @param user the user
+     */
     private void openLanding(User user) {
         try {
             FXMLLoader loader = new FXMLLoader(
@@ -56,7 +87,6 @@ public class LoginCodeBehind {
             );
             Parent root = loader.load();
 
-            // Get landing controller and send username
             DefaultLandingPageCodeBehind landing = loader.getController();
             landing.setUsername(user.getName());
             landing.setRole(user.getRole());

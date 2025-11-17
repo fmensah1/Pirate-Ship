@@ -9,39 +9,78 @@ import edu.westga.cs3211.pirate_ship_inventory.model.Authenticator;
 import edu.westga.cs3211.pirate_ship_inventory.model.Role;
 import edu.westga.cs3211.pirate_ship_inventory.model.User;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class LoginViewModel.
+ * 
+ * @author fmensah1
+ * @version cs3211
+ */
 public class LoginViewModel {
 
+    /** The username property. */
     private StringProperty usernameProperty;
+    
+    /** The password property. */
     private StringProperty passwordProperty;
+    
+    /** The current users. */
     private ArrayList<User> currentUsers;
+    
+    /** The login text. */
     private StringProperty loginText;
+    
+    /** The authenticator. */
     private final Authenticator authenticator;
 
+    /**
+     * Instantiates a new login view model.
+     */
     public LoginViewModel() {
         this.usernameProperty = new SimpleStringProperty("");
         this.passwordProperty = new SimpleStringProperty("");
         this.currentUsers = new ArrayList<>();
         this.loginText = new SimpleStringProperty("");
 
-        currentUsers.add(new User("Enoch", "1234", Role.CREWMATE));
-        currentUsers.add(new User("Felix", "abcd", Role.QUARTERMASTER));
-        currentUsers.add(new User("Abdul", "asdf", Role.COOK));
+        this.currentUsers.add(new User("Enoch", "1234", Role.CREWMATE));
+        this.currentUsers.add(new User("Felix", "abcd", Role.QUARTERMASTER));
+        this.currentUsers.add(new User("Abdul", "asdf", Role.COOK));
         
-        this.authenticator = new Authenticator(currentUsers);
+        this.authenticator = new Authenticator(this.currentUsers);
     }
 
+    /**
+     * Username property.
+     *
+     * @return the string property
+     */
     public StringProperty usernameProperty() {
         return this.usernameProperty;
     }
 
+    /**
+     * Password property.
+     *
+     * @return the string property
+     */
     public StringProperty passwordProperty() {
         return this.passwordProperty;
     }
 
+    /**
+     * Login text property.
+     *
+     * @return the string property
+     */
     public StringProperty loginTextProperty() {
         return this.loginText;
     }
 
+    /**
+     * Login.
+     *
+     * @return the user
+     */
     public User login() {
         String name = this.usernameProperty.getValue();
         String password = this.passwordProperty.getValue();
@@ -51,11 +90,9 @@ public class LoginViewModel {
             return null;
         }
 
-
-        User user = this.authenticator.verifyUser(name, password); // see Authenticator change below
+        User user = this.authenticator.verifyUser(name, password); 
         if (user != null) {
             this.loginText.set("Login successful for " + name);
-            // Clear sensitive input
             this.usernameProperty.setValue("");
             this.passwordProperty.setValue("");
             return user;

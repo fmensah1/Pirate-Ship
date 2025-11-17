@@ -5,6 +5,9 @@ import java.util.Date;
 // TODO: Auto-generated Javadoc
 /**
  * The Class Stock.
+ * 
+ * @author fmensah1
+ * @version cs3211
  */
 public class Stock {
 	
@@ -22,7 +25,6 @@ public class Stock {
 	
 	/** The expiration date. */
 	private Date expirationDate;
-	
 	
 	/**
 	 * Instantiates a new stock.
@@ -63,15 +65,15 @@ public class Stock {
 	    if (expirationDate.before(today)) {
 	        throw new IllegalArgumentException("Expiration date cannot be in the past");
 	    }
-
+ 
+	    }
+	    
 	    this.name = name;
 	    this.size = size;
 	    this.specialQuals = specialQuals.trim();
 	    this.condition = condition;
 	    this.expirationDate = expirationDate;
-	    }
 	}
-
 
 	/**
 	 * Gets the name.
@@ -79,9 +81,8 @@ public class Stock {
 	 * @return the name
 	 */
 	public String getName() {
-		return name;
+		return this.name;
 	}
-
 
 	/**
 	 * Sets the name.
@@ -92,16 +93,14 @@ public class Stock {
 		this.name = name;
 	}
 
-
 	/**
 	 * Gets the size.
 	 *
 	 * @return the size
 	 */
 	public int getSize() {
-		return size;
+		return this.size;
 	}
-
 
 	/**
 	 * Sets the size.
@@ -112,16 +111,14 @@ public class Stock {
 		this.size = size;
 	}
 
-
 	/**
 	 * Gets the special quals.
 	 *
 	 * @return the special quals
 	 */
 	public String getSpecialQuals() {
-		return specialQuals;
+		return this.specialQuals;
 	}
-
 
 	/**
 	 * Sets the special quals.
@@ -132,21 +129,19 @@ public class Stock {
 		this.specialQuals = specialQuals;
 	}
 
-
 	/**
 	 * Gets the condition.
 	 *
 	 * @return the condition
 	 */
 	public Condition getCondition() {
-		return condition;
+		return this.condition;
 	}
-
 
 	/**
 	 * Sets the condition.
 	 *
-	 * @param condition the new condition
+	 * @param newCondition the new Condition
 	 */
 	public void setCondition(Condition newCondition) {
 	    if (newCondition == null) {
@@ -155,16 +150,14 @@ public class Stock {
         this.condition = newCondition;
     }
 
-
 	/**
 	 * Gets the expiration date.
 	 *
 	 * @return the expiration date
 	 */
 	public Date getExpirationDate() {
-		return expirationDate;
+		return this.expirationDate;
 	}
-
 
 	/**
 	 * Sets the expiration date.
@@ -174,8 +167,6 @@ public class Stock {
 	public void setExpirationDate(Date expirationDate) {
 		this.expirationDate = expirationDate;
 	}
-	
-	
 	
 	  @Override
 	    public String toString() {

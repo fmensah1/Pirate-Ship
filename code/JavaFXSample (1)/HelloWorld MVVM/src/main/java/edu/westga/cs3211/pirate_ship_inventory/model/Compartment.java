@@ -1,59 +1,116 @@
 package edu.westga.cs3211.pirate_ship_inventory.model;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Compartment.
+ * 
+ * @author fmensah1
+ * @version cs3211
+ */
 public class Compartment {
+	
+	/** The label. */
 	private String label;
+	
+	/** The items. */
 	private List<Stock> items;
+	
+	/** The capacity. */
 	private int capacity;
+	
+	/** The special quality. */
 	private String specialQuality;
 	
-	public Compartment(String label, ArrayList<Stock> items, int capacity, String specialQuality) { // FIXED: parameter name
+	/**
+	 * Instantiates a new compartment.
+	 *
+	 * @param label the label
+	 * @param items the items
+	 * @param capacity the capacity
+	 * @param specialQuality the special quality
+	 */
+	public Compartment(String label, ArrayList<Stock> items, int capacity, String specialQuality) {
 	    if (label == null || label.isBlank()) {
 	        throw new IllegalArgumentException("Label cannot be null or empty");
 	    }
 	    if (capacity <= 0) {
 	        throw new IllegalArgumentException("Capacity must be positive");
 	    }
-	    if (specialQuality == null || specialQuality.isBlank()) { // ADDED: null check
+	    if (specialQuality == null || specialQuality.isBlank()) {
 	        throw new IllegalArgumentException("Special quality cannot be null or empty");
 	    }
 
 	    this.label = label;
-	    this.items = (items != null) ? items : new ArrayList<>();
+	    
+	    if (items != null) {
+	        this.items = items;
+	    } else {
+	        this.items = new ArrayList<>();
+	    }
+	    
 	    this.capacity = capacity;
-	    this.specialQuality = specialQuality.toLowerCase(); // NOW this works correctly
+	    this.specialQuality = specialQuality.toLowerCase();
 	}
-
-	    public String getLabel() {
+	
+	    /**
+    	 * Gets the label.
+    	 *
+    	 * @return the label
+    	 */
+    	public String getLabel() {
 	        return this.label;
 	    }
 
-	    public List<Stock> getItems() {
+	    /**
+    	 * Gets the items.
+    	 *
+    	 * @return the items
+    	 */
+    	public List<Stock> getItems() {
 	        return this.items;
 	    }
 
-	    public int getCapacity() {
+	    /**
+    	 * Gets the capacity.
+    	 *
+    	 * @return the capacity
+    	 */
+    	public int getCapacity() {
 	        return this.capacity;
 	    }
 
-	    public int getUsedSpace() {
+	    /**
+    	 * Gets the used space.
+    	 *
+    	 * @return the used space
+    	 */
+    	public int getUsedSpace() {
 	        int total = 0;
-	        for (Stock s : this.items) {
-	            total += s.getSize();
+	        for (Stock stock1 : this.items) {
+	            total += stock1.getSize();
 	        }
 	        return total;
 	    }
 
-	    public int getFreeSpace() {
-	        return this.capacity - getUsedSpace();
+	    /**
+    	 * Gets the free space.
+    	 *
+    	 * @return the free space
+    	 */
+    	public int getFreeSpace() {
+	        return this.capacity - this.getUsedSpace();
 	    }
 
-	    // Basic version: just checks space for now
-	    public boolean canStore(Stock stock) {
+	    /**
+    	 * Can store.
+    	 *
+    	 * @param stock the stock
+    	 * @return true, if successful
+    	 */
+    	public boolean canStore(Stock stock) {
 	        if (stock == null) {
 	            return false;
 	        }
@@ -61,10 +118,16 @@ public class Compartment {
 	        if (!this.isCompatibleWith(stock)) {
 	            return false;
 	        }
-	        return stock.getSize() <= getFreeSpace();
+	        return stock.getSize() <= this.getFreeSpace();
 	    }
 	    
-	    private boolean isCompatibleWith(Stock stock) {
+	    /**
+    	 * Checks if is compatible with.
+    	 *
+    	 * @param stock the stock
+    	 * @return true, if is compatible with
+    	 */
+    	private boolean isCompatibleWith(Stock stock) {
 	        if (this.specialQuality.equals("general")) {
 	            return true;
 	        }
@@ -79,21 +142,36 @@ public class Compartment {
 	        return true;
 	    }
 
-	    public void addStock(Stock stock) {
+	    /**
+    	 * Adds the stock.
+    	 *
+    	 * @param stock the stock
+    	 */
+    	public void addStock(Stock stock) {
 	        if (stock == null) {
 	            throw new IllegalArgumentException("Stock cannot be null");
 	        }
-	        if (!canStore(stock)) {
+	        if (!this.canStore(stock)) {
 	            throw new IllegalStateException("Compartment cannot store this stock - either incompatible type or not enough space");
 	        }
 	        this.items.add(stock);
 	    }
 	    
-	    public String getSpecialQuality() {
+	    /**
+    	 * Gets the special quality.
+    	 *
+    	 * @return the special quality
+    	 */
+    	public String getSpecialQuality() {
 	         return this.specialQuality;
 	     }
 	    
-	    @Override
+	    /**
+    	 * To string.
+    	 *
+    	 * @return the string
+    	 */
+    	@Override
 	    public String toString() {
 	        return String.format("%s (%s) - %d/%d (%d free)", 
 	            this.label, 

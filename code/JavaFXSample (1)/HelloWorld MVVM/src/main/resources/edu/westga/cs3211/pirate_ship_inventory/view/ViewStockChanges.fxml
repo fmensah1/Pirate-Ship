@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="600.0" prefWidth="879.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs3211.pirate_ship_inventory.view.ViewStockChangesCodeBehind">
+   
+   <children>
+      <!-- Header -->
+      <Label layoutX="20.0" layoutY="20.0" style="-fx-font-size: 24; -fx-font-weight: bold;" text="Stock Changes Log" />
+      
+      <!-- Filters Section -->
+      <VBox layoutX="20.0" layoutY="60.0" spacing="10.0">
+         <Label style="-fx-font-weight: bold;" text="Filters:" />
+         
+         <!-- Special Qualities Filter -->
+         <HBox spacing="10.0">
+            <Label text="Special Qualities:" />
+            <CheckBox fx:id="flammableFilter" text="Flammable" />
+            <CheckBox fx:id="liquidFilter" text="Liquid" />
+            <CheckBox fx:id="perishableFilter" text="Perishable" />
+         </HBox>
+         
+         <!-- Time Range Filter -->
+         <HBox spacing="10.0">
+            <Label text="Time Range:" />
+            <DatePicker fx:id="startDatePicker" promptText="Start Date" />
+            <Label text="to" />
+            <DatePicker fx:id="endDatePicker" promptText="End Date" />
+            <Button fx:id="applyTimeFilter" text="Apply Time Filter" />
+         </HBox>
+         
+         <!-- Action Buttons -->
+         <HBox spacing="10.0">
+            <Button fx:id="applyFiltersButton" style="-fx-background-color: #2E8B57; -fx-text-fill: white;" text="Apply Filters" />
+            <Button fx:id="clearFiltersButton" text="Clear Filters" />
+            <Button fx:id="backButton" style="-fx-background-color: #6c757d; -fx-text-fill: white;" text="Back to Main" />
+         </HBox>
+      </VBox>
+      
+      <!-- Status Message -->
+      <Label fx:id="statusLabel" layoutX="20.0" layoutY="180.0" prefWidth="760.0" />
+      
+      <!-- Stock Changes Table -->
+      <TableView fx:id="stockChangesTable" layoutX="20.0" layoutY="210.0" prefHeight="350.0" prefWidth="816.0">
+        <columns>
+            <TableColumn fx:id="timestampColumn" prefWidth="150" text="Timestamp" />
+            <TableColumn fx:id="crewMateColumn" prefWidth="120" text="Crew Mate" />
+            <TableColumn fx:id="itemNameColumn" prefWidth="120" text="Item Name" />
+            <TableColumn fx:id="sizeColumn" prefWidth="80" text="Size" />
+            <TableColumn fx:id="conditionColumn" prefWidth="100" text="Condition" />
+            <TableColumn fx:id="specialQualitiesColumn" prefWidth="120" text="Special Qualities" />
+            <TableColumn fx:id="compartmentColumn" prefWidth="150" text="Compartment" />
+            <TableColumn fx:id="freeSpaceColumn" prefWidth="100" text="Free Space" />
+        </columns>
+      </TableView>
+      
+      <!-- Summary -->
+      <Label fx:id="summaryLabel" layoutX="20.0" layoutY="570.0" prefWidth="760.0" />
+   </children>
+</AnchorPane>
